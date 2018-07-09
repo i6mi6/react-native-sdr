@@ -1,6 +1,6 @@
 {
   "name": "react-native-sdr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Server Driven Rendering (SDR) component for React Native",
   "main": "index.js",
   "scripts": {
@@ -22,9 +22,9 @@
   "author": "Alexander Vitanov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SoftZen/react-native-sdr/issues"
+    "url": "https://github.com/i6mi6/react-native-sdr/issues"
   },
-  "homepage": "https://github.com/SoftZen/react-native-sdr#readme",
+  "homepage": "https://github.com/i6mi6/react-native-sdr#readme",
   "devDependencies": {
     "babel-jest": "22.4.0",
     "babel-preset-react-native": "4.0.0",
