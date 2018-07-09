@@ -86,7 +86,7 @@ It used for rendering the component. It must look like this:
 will render
 
 ```jsx
-<Text>Name: John Does, Action: Liked your comment</Text>
+<Text>Name: John Doe, Action: Liked your comment</Text>
 ```
 
 There are multiple types of variables:
