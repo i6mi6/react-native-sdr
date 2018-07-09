@@ -1,20 +1,20 @@
 # react-native-sdr
 Server Driven Rendering (SDR) component for React Native
 
-#Installation
+# Installation
 
 ```javascript
 $ npm install react-native-sdr --save
 ```
 
-#Motivation
+# Motivation
 
 Server Driven Rendering (SDR) is the process in which an app is told how to render a component remotely.
 The difference between SDR and Server Side Rendering (SSR) is that the latter does the actual rendering.
 Imagine yourself building a social network app and you have to implement elements for the timeline.
 Normally, you would have multiple types of data (news, photo shares, announcements, etc.) and corresponding components for them. However, as time goes you will find the need to push new updates for every new type you add (or even small UI tweak in certain components). SDR allows you to specify the template on your server and pass it on to your app, which will handle the assembly.
 
-#Usage
+# Usage
 
 ```
 import SDRContainer from 'react-native-sdr';
@@ -96,7 +96,7 @@ There are multiple types of variables:
 
 *Refer to the Example for more*
 
-## Available props:
+# Available props:
 
 | prop | type | description |default|
 | ------ | ------ | ------ | ------ |
