@@ -16,7 +16,7 @@ Normally, you would have multiple types of data (news, photo shares, announcemen
 
 # Usage
 
-```
+```jsx
 import SDRContainer from 'react-native-sdr';
 
   getSDRTemplate() {
@@ -32,15 +32,16 @@ import SDRContainer from 'react-native-sdr';
       <SDRContainer
         sdrTemplate={this.getSDRTemplate()}
         sdrTypes={this.getSDRTypes()}
-        {...this.getProps()} />
+        // ...otherProps 
+        />
     )
   }
 ```
 
-The component requires a template and types. 
+The component requires a **types** and a **template**. 
 Types are all elements that the component has access to (Image, View, etc.). If you want the component to be able to use them during the assembly, you must specify them beforehand.
 
-```
+```jsx
 getSDRTypes() {
     return {
       "Text": Text,
@@ -62,9 +63,9 @@ It used for rendering the component. It must look like this:
 }
 ```
 
-Template variables are used to access props passed to the component. Example:
+**Template variables** are used to access props passed to the component. Example:
 
-```
+```jsx
 // props to component in the app
 {
   notification: {
@@ -84,15 +85,17 @@ Template variables are used to access props passed to the component. Example:
 
 will render
 
-```
+```jsx
 <Text>Name: John Does, Action: Liked your comment</Text>
 ```
 
 There are multiple types of variables:
 
-|prop::some.path.to.object|Retrieves the object from this.props|
-|function::some.path.to.function|Retrieves the function from this.props|
-|${text::some.path.to.text}|Retrieves the text from this.props|
+| variable | description |
+| ------ | ------ |
+|prop::some.path.to.object|Retrieves the object from **this.props**|
+|function::some.path.to.function|Retrieves the function from **this.props**|
+|${text::some.path.to.text}|Retrieves the text from **this.props**|
 
 *Refer to the Example for more*
 
