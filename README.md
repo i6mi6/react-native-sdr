@@ -6,6 +6,12 @@
 $ npm install react-native-sdr --save
 ```
 
+or 
+
+```javascript
+$ yarn add react-native-sdr
+```
+
 # Motivation
 
 Server Driven Rendering (SDR) is the process in which an app is told how to render a component remotely.
