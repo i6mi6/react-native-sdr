@@ -1,5 +1,4 @@
-# react-native-sdr
-Server Driven Rendering (SDR) component for React Native
+# Server Driven Rendering (SDR) for React Native
 
 # Installation
 
