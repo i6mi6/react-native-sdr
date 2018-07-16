@@ -24,6 +24,62 @@ Normally, you would have multiple types of data (news, photo shares, announcemen
 
 # Usage
 
+## Autosync with server
+
+On your Client:
+
+```jsx
+import { Provider, SDRClient } from 'react-native-sdr';
+
+const ApiClient = {
+  method: "get",
+  baseUrl: "http://localhost:3000",
+  sdrTypes: {
+    "Text": Text,
+    "View": View,
+    "Image": Image,
+    "Button": TouchableOpacity,
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <Provider client={ApiClient}>
+        <ScreenOne />
+      </Provider>
+    )
+  }
+}
+
+class ScreenOne extends React.Component {
+  render() {
+    return (
+      <View>
+        <SDRClient
+          url="/sdr/notifications/preview"
+          {...otherProps}
+        />
+      </View>
+    )
+  }
+}
+
+```
+
+and your (example Express) Server:
+
+```javascript
+
+app.get('/sdr/notifications/:type', (req, res) => {
+  const template = req.params.type === "preview" ? getPreviewTemplate() : getFullTemplate()
+  res.json(template)
+})
+
+```
+
+## Manual lifecycle handling
+
 ```jsx
 import SDRContainer from 'react-native-sdr';
 
@@ -46,17 +102,17 @@ import SDRContainer from 'react-native-sdr';
   }
 ```
 
-The component requires a **types** and a **template**. 
-Types are all elements that the component has access to (Image, View, etc.). If you want the component to be able to use them during the assembly, you must specify them beforehand.
+## Templates and types
+
+The component requires **types** and a **template**. 
+Types are all elements that the component has access to (Image, View, etc.). If you want the component to be able to use them during the assembly, you must specify them beforehand. An example types object looks like this:
 
 ```jsx
-getSDRTypes() {
-    return {
-      "Text": Text,
-      "View": View,
-      "Image": Image,
-      "Button": TouchableOpacity,
-    }
+ {
+    "Text": Text,
+    "View": View,
+    "Image": Image,
+    "Button": TouchableOpacity,
   }
 ```
 
@@ -74,7 +130,7 @@ It used for rendering the component. It must look like this:
 **Template variables** are used to access props passed to the component. Example:
 
 ```jsx
-// props to component in the app
+// some usual props to your component
 {
   notification: {
     meta: {
@@ -108,6 +164,22 @@ There are multiple types of variables:
 *Refer to the Example for more*
 
 # Available props:
+
+## Provider 
+
+| prop | type | description |default|
+| ------ | ------ | ------ | ------ |
+|client|object|The client used for sync with the server||
+
+## SDRClient 
+
+| prop | type | description |default|
+| ------ | ------ | ------ | ------ |
+|url|string|The endpoint which is expected to return a **template**||
+|renderLoading|func|Renders a loading component during sync|<View><ActivityIndicator/></View>|
+|renderError|func|Renders an error component if an error occurs during sync|<View/>|
+
+## SDRContainer 
 
 | prop | type | description |default|
 | ------ | ------ | ------ | ------ |
