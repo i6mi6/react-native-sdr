@@ -1,5 +1,5 @@
 
-![alt text](media/logo.png =250x250)
+<img src="./media/logo.png" width="250" alt="My cool logo"/>
 
 # Server Driven Rendering (SDR) for React Native
 
