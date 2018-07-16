@@ -1,6 +1,6 @@
 {
   "name": "react-native-sdr",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Server Driven Rendering (SDR) component for React Native",
   "main": "index.js",
   "scripts": {
@@ -30,10 +30,11 @@
     "babel-preset-react-native": "4.0.0",
     "jest": "22.4.0",
     "react-test-renderer": "16.2.0",
-    "react": "16.2.0",
-    "react-native": "0.53.3"
+    "react": "16.3.1",
+    "react-native": "0.55.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "prop-types": "^15.6.0"
   }
 }

@@ -3,73 +3,40 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native'
 import View from 'react-native-view'
-import SDRContainer from 'react-native-sdr';
+import { Provider, SDRClient } from './SDR';
+
+const ApiClient = {
+  method: "get",
+  baseUrl: "http://localhost:3000",
+  sdrTypes: {
+    "Text": Text,
+    "View": View,
+    "Image": Image,
+    "Button": TouchableOpacity,
+  }
+}
 
 class Example extends React.Component {
 
-  getSDRTemplate() {
-    return {
-      type: "View",
-      props: { mdp: true, style: { height: 140, borderWidth: 1, marginTop: 50, backgroundColor: "#F3E5F5" } },
-      children: [
-        {
-          type: "View",
-          props: { flex: true, row: true },
-          children: [
-            {
-              type: "View",
-              props: { style: { flex: 0.5 } },
-              children: [
-                {
-                  type: "Text",
-                  children: "${text::notification.userName}",
-                },
-                {
-                  type: "Image",
-                  props: {
-                    source: { uri: "prop::notification.icon" },
-                    style: { width: 50, height: 50 },
-                  },
-                },
-              ]
-            },
-            {
-              type: "View",
-              props: { vcenter: true, style: { flex: 1 } },
-              children: [
-                {
-                  type: "Text",
-                  children: "${text::notification.title}",
-                },
-              ]
-            },
-          ]
-        },
-        {
-          type: "Button",
-          props: {
-            onPress: "function::notification.onPress(${text::item.info.buttonName})",
-            style: "prop::notification.buttonStyle"
-          },
-          children: [
-            {
-              type: "Text",
-              props: { style: { color: "white" } },
-              children: "Open ${text::notification.userName}'s profile",
-            }
-          ]
-        }
-      ]
-    }
+  render() {
+    return (
+      <Provider client={ApiClient}>
+        <ScreenOne />
+      </Provider>
+    )
   }
+}
+
+class ScreenOne extends React.Component {
 
   handleNotificationPress(name) {
     alert(name + " liked your post!")
   }
 
-  getProps() {
+  getNotification() {
     return {
       notification: {
         title: "Liked your post",
@@ -82,22 +49,27 @@ class Example extends React.Component {
     }
   }
 
-  getSDRTypes() {
-    return {
-      "Text": Text,
-      "View": View,
-      "Image": Image,
-      "Button": TouchableOpacity,
-    }
+  renderLoading() {
+    return (
+      <View hcenter vcenter style={{ height: 140, borderWidth: 1, marginTop: 50 }}>
+        <ActivityIndicator size="small" />
+      </View>
+    )
   }
 
   render() {
     return (
       <View flex>
-        <SDRContainer
-          sdrTemplate={this.getSDRTemplate()}
-          sdrTypes={this.getSDRTypes()}
-          {...this.getProps()} />
+        <SDRClient
+          url="notifications/full"
+          renderLoading={this.renderLoading}
+          {...this.getNotification()}
+        />
+        <SDRClient
+          url="notifications/preview"
+          renderLoading={this.renderLoading}
+          {...this.getNotification()}
+        />
       </View>
     )
   }
