@@ -1,3 +1,6 @@
+
+![alt text](media/logo.png =250x250)
+
 # react-native-sdr
 Server Driven Rendering (SDR) component for React Native
 
