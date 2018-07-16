@@ -1,8 +1,7 @@
 
 ![alt text](media/logo.png =250x250)
 
-# react-native-sdr
-Server Driven Rendering (SDR) component for React Native
+# Server Driven Rendering (SDR) for React Native
 
 # Installation
 
@@ -10,16 +9,22 @@ Server Driven Rendering (SDR) component for React Native
 $ npm install react-native-sdr --save
 ```
 
+or 
+
+```javascript
+$ yarn add react-native-sdr
+```
+
 # Motivation
 
 Server Driven Rendering (SDR) is the process in which an app is told how to render a component remotely.
-The difference between SDR and Server Side Rendering (SSR) is that the latter does the actual rendering.
+The difference between SDR and Server Side Rendering (SSR) is that in the latter the server does the actual rendering.
 Imagine yourself building a social network app and you have to implement elements for the timeline.
-Normally, you would have multiple types of data (news, photo shares, announcements, etc.) and corresponding components for them. However, as time goes you will find the need to push new updates for every new type you add (or even small UI tweak in certain components). SDR allows you to specify the template on your server and pass it on to your app, which will handle the assembly.
+Normally, you would have multiple types of data (news, photo shares, announcements, etc.) and corresponding components for them. However, as time goes you will find the need to push new updates for every new type you add (or even small UI tweaks in certain components). SDR allows you to specify the template on your server and pass it on to your app in order to handle the rendering.
 
 # Usage
 
-```
+```jsx
 import SDRContainer from 'react-native-sdr';
 
   getSDRTemplate() {
@@ -35,15 +40,16 @@ import SDRContainer from 'react-native-sdr';
       <SDRContainer
         sdrTemplate={this.getSDRTemplate()}
         sdrTypes={this.getSDRTypes()}
-        {...this.getProps()} />
+        // ...otherProps 
+        />
     )
   }
 ```
 
-The component requires a template and types. 
+The component requires a **types** and a **template**. 
 Types are all elements that the component has access to (Image, View, etc.). If you want the component to be able to use them during the assembly, you must specify them beforehand.
 
-```
+```jsx
 getSDRTypes() {
     return {
       "Text": Text,
@@ -65,9 +71,9 @@ It used for rendering the component. It must look like this:
 }
 ```
 
-Template variables are used to access props passed to the component. Example:
+**Template variables** are used to access props passed to the component. Example:
 
-```
+```jsx
 // props to component in the app
 {
   notification: {
@@ -87,15 +93,17 @@ Template variables are used to access props passed to the component. Example:
 
 will render
 
-```
-<Text>Name: John Does, Action: Liked your comment</Text>
+```jsx
+<Text>Name: John Doe, Action: Liked your comment</Text>
 ```
 
 There are multiple types of variables:
 
-|prop::some.path.to.object|Retrieves the object from this.props|
-|function::some.path.to.function|Retrieves the function from this.props|
-|${text::some.path.to.text}|Retrieves the text from this.props|
+| variable | description |
+| ------ | ------ |
+|prop::some.path.to.object|Retrieves the object from **this.props**|
+|function::some.path.to.function|Retrieves the function from **this.props**|
+|${text::some.path.to.text}|Retrieves the text from **this.props**|
 
 *Refer to the Example for more*
 
