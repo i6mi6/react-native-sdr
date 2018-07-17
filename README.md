@@ -117,7 +117,7 @@ Types are all elements that the component has access to (Image, View, etc.). If 
 ```
 
 The template is what you pass from the server to the component. 
-It used for rendering the component. It must look like this:
+It's used for rendering the component. It must look like this:
 
 ```
 {
